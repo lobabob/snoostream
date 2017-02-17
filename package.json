@@ -1,0 +1,30 @@
+{
+  "name": "snoostream",
+  "version": "0.1.0",
+  "description": "A streaming client for reddit, built on top of snoowrap. Built in support for sending comments and submissions to an AWS SQS Queue.",
+  "main": "SnooStream.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lobabob/snoostream.git"
+  },
+  "keywords": [
+    "snoowrap",
+    "reddit",
+    "api",
+    "client",
+    "oauth",
+    "script"
+  ],
+  "author": "Farhankhan Daya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lobabob/snoostream/issues"
+  },
+  "homepage": "https://github.com/lobabob/snoostream#readme",
+  "dependencies": {
+    "snoowrap": "^1.12.0"
+  }
+}

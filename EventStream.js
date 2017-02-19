@@ -6,7 +6,7 @@ const EventEmitter = require('events');
 class EventStream extends EventEmitter {
   /**
    * @param {number} rate Will execute pollFn every rate milliseconds
-   * @param {function} pollFn The function to be polled. The results of pollFn() will be emitted.
+   * @param {function} pollFn The function to be polled. The results of pollFn() will be emitted. Must be a Promise
    * @param {*} options The arguments pollFn should be called with.
    */
   constructor (rate, pollFn, ...options) {
@@ -17,7 +17,7 @@ class EventStream extends EventEmitter {
 
     this.start();
   }
-  poll () {
+  _poll () {
     if (this.stopped) {
       return;
     }
@@ -25,19 +25,18 @@ class EventStream extends EventEmitter {
     const startTime = Date.now();
 
     const req = this.pollFn(...this.pollOptions).then(data => {
-      data.filter(piece => piece.created_utc >= startTime)
-        .forEach(piece => this.emit('data', piece));
+      this.emit('data', data, startTime);
     }).catch(e => this.emit('error', e));
 
     // eslint-disable-next-line promise/catch-or-return
-    req.then(() => setTimeout(this.poll, this.rate - (Date.now() - startTime)));
+    req.then(() => setTimeout(() => this._poll(), this.rate - (Date.now() - startTime)));
   }
   /**
-   * Will start the event stream. A new EventStream is started by default on construction.
+   * Will start the event stream. EventStreams are started by default on construction.
    */
   start () {
     this.stopped = false;
-    this.poll();
+    this._poll();
   }
   /**
    * Will stop the event stream.

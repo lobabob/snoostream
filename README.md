@@ -11,7 +11,7 @@ An event based wrapper for getting new comments and submissions from Snoowrap.
 ## Installation
 
 ```sh
-npm install snoostream 
+npm install snoostream
 ```
 
 ## Usage
@@ -39,9 +39,12 @@ let snooWrap = new Snoowrap({
 let snooStream = SnooStream(snooWrap);
 ```
 
-`SnooStream({options || Snoowrap}, drift)`
+`SnooStream(options[, drift])`
 
-* `{options || Snoowrap}` Snoowrap configuration or a Snoowrap object
+`SnooStream(Snoowrap[, drift])`
+
+* `options` Snoowrap configuration
+* `Snoowrap` A Snoowrap object
 * `drift` the number of seconds system time is ahead of Reddit server time. Usually not needed.
 
 ### Create a Comment Stream
@@ -57,7 +60,7 @@ commentStream.on('post', (post, match) => {
 });
 ```
 
-`snooStream.commentStream(subreddit, {options})`
+`snooStream.commentStream(subreddit[, options])`
 
 * `subreddit` the subreddit to poll for new comments. Default is 'all'.
 * `options.regex` Will only emit posts that match the provided regex
@@ -77,7 +80,7 @@ submissionStream.on('post', (post, match) => {
 });
 ```
 
-`snooStream.submissionStream(subreddit, {options})`
+`snooStream.submissionStream(subreddit[, options])`
 
 * `subreddit` the subreddit to poll for new submissions. Default is 'all'.
 * `options.regex` Will only emit posts that match the provided regex

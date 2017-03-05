@@ -1,6 +1,6 @@
 {
   "name": "snoostream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An event based wrapper for getting new comments and submissions from Snoowrap.",
   "main": "index.js",
   "scripts": {

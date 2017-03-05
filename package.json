@@ -1,7 +1,7 @@
 {
   "name": "snoostream",
   "version": "1.0.0",
-  "description": "A streaming client for reddit, built on top of snoowrap. Built in support for sending comments and submissions to an AWS SQS Queue.",
+  "description": "An event based wrapper for getting new comments and submissions from Snoowrap.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . --cache",

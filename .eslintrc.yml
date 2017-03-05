@@ -1,0 +1,105 @@
+env:
+  es6: true
+  node: true
+extends: eslint:recommended
+plugins:
+  - promise
+rules:
+  array-bracket-spacing: error
+  array-callback-return: error
+  arrow-parens: [error, as-needed]
+  arrow-body-style: [error, as-needed]
+  arrow-spacing: error
+  block-spacing: error
+  brace-style: [error, 1tbs, { allowSingleLine: true }]
+  comma-dangle: error
+  comma-spacing: error
+  comma-style: error
+  computed-property-spacing: error
+  curly: error
+  dot-notation: error
+  dot-location: [error, property]
+  eqeqeq: [error, smart]
+  func-call-spacing: error
+  indent: [error, 2]
+  key-spacing: error
+  keyword-spacing: error
+  linebreak-style: [error, unix]
+  max-len: [error, { code: 120, tabWidth: 2 }]
+  max-statements-per-line: error
+  new-parens: error
+  no-caller: error
+  no-catch-shadow: error
+  no-console: off
+  no-duplicate-imports: error
+  no-extend-native: error
+  no-eval: error
+  no-extra-bind: error
+  no-extra-label: error
+  no-extra-parens: [error, all, { nestedBinaryExpressions: false }]
+  no-floating-decimal: error
+  no-global-assign: error
+  no-implied-eval: error
+  no-label-var: error
+  no-lone-blocks: error
+  no-lonely-if: error
+  no-mixed-operators: error
+  no-multi-spaces: error
+  no-new: error
+  no-new-func: error
+  no-new-wrappers: error
+  no-new-object: error
+  no-new-require: error
+  no-octal: error
+  no-octal-escape: error
+  no-proto: error
+  no-restricted-properties: [error, { object: describe, property: only }, { object: it, property: only }]
+  no-script-url: error
+  no-self-assign: error
+  no-self-compare: error
+  no-sequences: error
+  no-shadow: error
+  no-tabs: error
+  no-template-curly-in-string: error
+  no-trailing-spaces: error
+  no-unneeded-ternary: error
+  no-unsafe-negation: error
+  no-unused-expressions: [error, { allowShortCircuit: true, allowTernary: true }]
+  no-unused-vars: error
+  no-useless-call: error
+  no-useless-computed-key: error
+  no-useless-concat: error
+  no-useless-constructor: error
+  no-useless-escape: error
+  no-useless-return: error
+  no-whitespace-before-property: error
+  no-with: error
+  no-var: error
+  object-curly-spacing: [error, always]
+  object-shorthand: error
+  operator-assignment: error
+  padded-blocks: [error, never]
+  prefer-arrow-callback: [error, { allowNamedFunctions: true }]
+  prefer-const: error
+  prefer-spread: error
+  prefer-numeric-literals: error
+  promise/catch-or-return: error
+  promise/no-nesting: error
+  promise/no-return-wrap: error
+  promise/param-names: error
+  quote-props: [error, as-needed]
+  quotes: [error, single, { avoidEscape: true }]
+  rest-spread-spacing: error
+  semi: error
+  semi-spacing: error
+  space-before-blocks: error
+  space-before-function-paren: error
+  space-in-parens: error
+  space-infix-ops: error
+  space-unary-ops: error
+  spaced-comment: error
+  strict: [error, global]
+  template-curly-spacing: error
+  valid-typeof: [error, { requireStringLiterals: true }]
+  wrap-iife: [error, inside]
+  yoda: error

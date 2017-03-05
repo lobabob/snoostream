@@ -1,10 +1,13 @@
 {
   "name": "snoostream",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A streaming client for reddit, built on top of snoowrap. Built in support for sending comments and submissions to an AWS SQS Queue.",
-  "main": "SnooStream.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ignore-path .gitignore . --cache",
+    "pretest": "npm run lint",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec --recursive test/",
+    "posttest": "istanbul check-coverage"
   },
   "repository": {
     "type": "git",
@@ -13,10 +16,13 @@
   "keywords": [
     "snoowrap",
     "reddit",
+    "stream",
+    "event",
+    "poll",
     "api",
     "client",
-    "oauth",
-    "script"
+    "script",
+    "bot"
   ],
   "author": "Farhankhan Daya",
   "license": "MIT",
@@ -25,6 +31,14 @@
   },
   "homepage": "https://github.com/lobabob/snoostream#readme",
   "dependencies": {
+    "pollify": "^1.0.0",
     "snoowrap": "^1.12.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.16.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
   }
 }

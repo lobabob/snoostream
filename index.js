@@ -34,7 +34,13 @@ function SnooStream (options, drift = 0) {
     return poll;
   }
   function parse (data, emitter, regex) {
-    const match = data.body.match(regex);
+    let match;
+    if (data.hasOwnProperty('body')) {
+      match = data.body.match(regex);
+    } else if (data.hasOwnProperty('selftext')) {
+      match = data.selftext.match(regex);
+    }
+
     if (match) {
       emitter.emit('post', data, match);
     }

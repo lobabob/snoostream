@@ -11,7 +11,10 @@ const SnooStream = require('..');
 function SnoowrapMock (drift = 0) {
   return {
     posts: [],
-    addPost (body, created_utc = timeInSecs() - drift) {
+    addPost (selftext, created_utc = timeInSecs() - drift) {
+      this.posts.push({ selftext, created_utc });
+    },
+    addComment (body, created_utc = timeInSecs() - drift) {
       this.posts.push({ body, created_utc });
     },
     getNew () {
@@ -36,8 +39,8 @@ describe('SnooStream', function () {
       commentStream.on('post', d => postsMatched.push(d));
 
       for (let i = 1; i <= 5; ++i) {
-        snooWrap.addPost('old', timeInSecs(Date.now() - (i * 1000)));
-        snooWrap.addPost('new', timeInSecs(Date.now() + (i * 1000)));
+        snooWrap.addComment('old', timeInSecs(Date.now() - (i * 1000)));
+        snooWrap.addComment('new', timeInSecs(Date.now() + (i * 1000)));
       }
 
       setTimeout(() => {
@@ -52,7 +55,7 @@ describe('SnooStream', function () {
       commentStream.on('post', d => postsMatched.push(d));
 
       for (let i = 0; i < 5; ++i) {
-        snooWrap.addPost('' + i);
+        snooWrap.addComment('' + i);
       }
 
       setTimeout(() => {
@@ -73,7 +76,7 @@ describe('SnooStream', function () {
       const commentStream = SnooStream(snooWrap, drift).commentStream('', { rate: 10 });
       commentStream.on('post', () => done());
 
-      snooWrap.addPost('will only be emitted if drift is accounted for');
+      snooWrap.addComment('will only be emitted if drift is accounted for');
     });
     it('limits post events to posts that match regex', function (done) {
       const postsMatched = [];
@@ -82,8 +85,8 @@ describe('SnooStream', function () {
       const commentStream = SnooStream(snooWrap).commentStream('', { regex });
       commentStream.on('post', d => postsMatched.push(d));
 
-      snooWrap.addPost('asdf asdf sadf abc asdf');
-      snooWrap.addPost('qwqwe asdf ewqiopadf');
+      snooWrap.addComment('asdf asdf sadf abc asdf');
+      snooWrap.addComment('qwqwe asdf ewqiopadf');
 
       setTimeout(() => {
         expect(postsMatched.every(p => !!p.body.match(regex))).to.be.true;
@@ -105,7 +108,7 @@ describe('SnooStream', function () {
       }
 
       setTimeout(() => {
-        expect(postsMatched.every(p => p.body !== 'old')).to.be.true;
+        expect(postsMatched.every(p => p.selftext !== 'old')).to.be.true;
         done();
       }, 100);
     });
@@ -125,7 +128,7 @@ describe('SnooStream', function () {
         dupCheck.fill(0);
 
         for (let i = 0; i < postsMatched.length; ++i) {
-          dupCheck[postsMatched[i].body]++;
+          dupCheck[postsMatched[i].selftext]++;
         }
         expect(dupCheck.every(count => count === 1)).to.be.true;
         done();
@@ -150,7 +153,7 @@ describe('SnooStream', function () {
       snooWrap.addPost('qwqwe asdf ewqiopadf');
 
       setTimeout(() => {
-        expect(postsMatched.every(p => !!p.body.match(regex))).to.be.true;
+        expect(postsMatched.every(p => !!p.selftext.match(regex))).to.be.true;
         done();
       }, 100);
     });
